@@ -1,0 +1,292 @@
+/* Giao dien chung cua QLST1, theo mau giao dien Hinh 5 (module 1) va Hinh 10 (module 2).
+   Chi dinh dang trinh bay: khong doi ten truong, nut, bang hay luong trang cua cac trang JSP. */
+
+:root {
+    --mau-chinh: #1d4ed8;
+    --mau-chinh-dam: #1e40af;
+    --mau-chinh-nhat: #eff6ff;
+    --mau-vien: #d6dde8;
+    --mau-chu: #1f2937;
+    --mau-chu-phu: #5b6475;
+    --mau-loi: #dc2626;
+    --bo-goc: 10px;
+}
+
+html {
+    background: linear-gradient(180deg, #e8eef8 0%, #f4f6fa 320px) fixed;
+    min-height: 100%;
+}
+body {
+    width: fit-content;
+    min-width: 460px;
+    max-width: 1500px;
+    margin: 40px auto;
+    padding: 22px 36px 32px 36px;
+    background: #ffffff;
+    border: 1px solid var(--mau-vien);
+    border-top: 5px solid var(--mau-chinh);
+    border-radius: var(--bo-goc);
+    box-shadow: 0 10px 30px rgba(15, 35, 75, 0.10), 0 2px 6px rgba(15, 35, 75, 0.06);
+    font-family: "Segoe UI", Roboto, Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--mau-chu);
+}
+
+/* tieu de */
+h2 {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 600;
+    color: var(--mau-chinh-dam);
+    margin: 4px 0 20px 0;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e6eaf1;
+}
+h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #334155;
+    margin: 22px 0 8px 0;
+}
+h4 {
+    margin: 10px 0;
+    color: #334155;
+}
+p {
+    margin: 8px 0;
+}
+
+/* lien ket */
+a {
+    color: var(--mau-chinh);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+/* cac lien ket chuc nang tren trang chu / trang quan li (moi lien ket mot dong) */
+body > p > a {
+    display: inline-block;
+    min-width: 260px;
+    padding: 10px 18px;
+    background: var(--mau-chinh-nhat);
+    border: 1px solid #c9d8f5;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.15s, border-color 0.15s;
+}
+body > p > a::after {
+    content: "\203A";
+    float: right;
+    margin-left: 16px;
+    color: #7b93c4;
+}
+body > p > a:hover {
+    background: #dde9fd;
+    border-color: #9db8ea;
+    text-decoration: none;
+}
+
+/* nut bam: nut chinh mau xanh dam */
+button, input[type="submit"] {
+    background: var(--mau-chinh);
+    border: 1px solid var(--mau-chinh);
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    padding: 8px 22px;
+    margin: 10px 10px 0 0;
+    cursor: pointer;
+    box-shadow: 0 1px 2px rgba(15, 35, 75, 0.15);
+    transition: background 0.15s, box-shadow 0.15s;
+}
+button:hover, input[type="submit"]:hover {
+    background: var(--mau-chinh-dam);
+    box-shadow: 0 3px 8px rgba(29, 78, 216, 0.28);
+}
+button:active, input[type="submit"]:active {
+    transform: translateY(1px);
+}
+/* nut phu (quay lai, huy, ve trang chu, dat them) : nen trang vien xanh */
+button[name="subBack"], button[name="subCancel"], button[name="subHome"],
+button[name="subContinue"], button:not([name]) {
+    background: #ffffff;
+    color: var(--mau-chinh);
+    border: 1px solid #b7c7e6;
+    box-shadow: none;
+}
+button[name="subBack"]:hover, button[name="subCancel"]:hover, button[name="subHome"]:hover,
+button[name="subContinue"]:hover, button:not([name]):hover {
+    background: var(--mau-chinh-nhat);
+    box-shadow: none;
+}
+/* nut co dang link trong bang (Xoa dong gio hang) */
+button.link, button.link:hover {
+    background: none;
+    border: none;
+    box-shadow: none;
+    color: var(--mau-chinh);
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+}
+button.link:hover {
+    text-decoration: underline;
+}
+
+/* o nhap */
+input[type="text"], select, textarea {
+    font-family: inherit;
+    font-size: 15px;
+    padding: 7px 10px;
+    border: 1px solid #c3ccda;
+    border-radius: 6px;
+    background: #ffffff;
+    color: var(--mau-chu);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+input[type="text"]:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #6b93e6;
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.15);
+}
+select {
+    min-width: 300px;
+}
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--mau-chinh);
+    vertical-align: middle;
+}
+input[type="file"] {
+    font-family: inherit;
+    font-size: 14px;
+    color: var(--mau-chu-phu);
+}
+input[type="file"]::file-selector-button {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--mau-chinh);
+    background: #ffffff;
+    border: 1px solid #b7c7e6;
+    border-radius: 6px;
+    padding: 5px 12px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+input[type="file"]::file-selector-button:hover {
+    background: var(--mau-chinh-nhat);
+}
+
+/* bang du lieu (danh sach mat hang, gio hang) */
+table.bang {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid var(--mau-vien);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 6px 0 12px 0;
+}
+table.bang td {
+    border-bottom: 1px solid #e6eaf1;
+    border-right: 1px solid #eef1f6;
+    padding: 8px 12px;
+}
+table.bang td:last-child {
+    border-right: none;
+}
+table.bang tr:last-child td {
+    border-bottom: none;
+}
+table.bang thead td {
+    background: var(--mau-chinh-nhat);
+    color: var(--mau-chinh-dam);
+    font-weight: 600;
+    white-space: nowrap;
+    border-bottom: 1px solid #c9d8f5;
+}
+table.bang tbody tr:nth-child(even) td {
+    background: #f8fafc;
+}
+table.bang tbody tr:hover td {
+    background: #eef4ff;
+}
+/* dong tong tien / tam tinh */
+table.bang tbody tr:has(> td > b) td {
+    background: #f1f5fb;
+    border-top: 1px solid var(--mau-vien);
+}
+/* o nhap, nut nho trong bang (sua so luong trong gio hang) */
+table.bang input[type="text"] {
+    padding: 4px 6px;
+    text-align: center;
+}
+table.bang input[type="submit"] {
+    font-size: 13px;
+    padding: 4px 10px;
+    margin: 0 0 0 4px;
+}
+
+/* bang bo cuc form (nhan : o nhap) */
+table[border="0"] td {
+    padding: 7px 16px 7px 0;
+    vertical-align: middle;
+}
+table[border="0"] td:first-child {
+    vertical-align: top;
+    padding-top: 13px;
+    color: var(--mau-chu-phu);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* thong bao loi (cac dong chu do cua trang) */
+[style*="color:red"] {
+    color: var(--mau-loi) !important;
+    font-weight: 500;
+}
+p[style*="color:red"] {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-left: 4px solid var(--mau-loi);
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+p[style*="color:red"]:empty, td[style*="color:red"]:empty {
+    display: none;
+}
+
+/* hop thong bao / canh bao */
+body.hop {
+    text-align: center;
+    min-width: 460px;
+    max-width: 560px;
+    margin-top: 90px;
+}
+body.hop h2 {
+    margin-bottom: 14px;
+}
+body.hop p {
+    margin: 8px 0;
+    font-size: 16px;
+}
+body.hop button {
+    min-width: 110px;
+    margin: 20px 8px 0 8px;
+}
+
+/* anh mat hang (truong inoutImage tren giao dien sua thong tin mat hang) */
+img.anh {
+    max-width: 220px;
+    max-height: 160px;
+    border: 1px solid var(--mau-vien);
+    border-radius: 8px;
+    padding: 4px;
+    background: #ffffff;
+    margin-bottom: 6px;
+}

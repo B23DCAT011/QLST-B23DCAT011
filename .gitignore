@@ -1,0 +1,3 @@
+tools/bak_*/
+*.class
+__pycache__/

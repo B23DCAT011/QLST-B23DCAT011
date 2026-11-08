@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>QLST1</display-name>
+
+    <!-- Trang doUpdateItem1.jsp nhan form co truong anh (inoutImage : File) nen can cau hinh multipart -->
+    <servlet>
+        <servlet-name>doUpdateItem1</servlet-name>
+        <jsp-file>/view/nhanvienkho/doUpdateItem1.jsp</jsp-file>
+        <multipart-config>
+            <max-file-size>5242880</max-file-size>
+            <max-request-size>10485760</max-request-size>
+        </multipart-config>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>doUpdateItem1</servlet-name>
+        <url-pattern>/view/nhanvienkho/doUpdateItem1.jsp</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+</web-app>
