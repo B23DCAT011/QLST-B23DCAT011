@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="dao.*,model.*"%>
+    pageEncoding="UTF-8" import="model.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +13,13 @@
     // trang chu dung khach hang mau cua du lieu mau: Nguyen Van An (id 1)
     Customer1 customer = (Customer1) session.getAttribute("customer");
     if (customer == null) {
-        customer = (new CustomerDAO1()).getCustomerInfo(1);
+        customer = new Customer1();
+        customer.setId(1);
+        FullName1 fullName = new FullName1();
+        fullName.setFamilyName("Nguyễn");
+        fullName.setMiddleName("Văn");
+        fullName.setGivenName("An");
+        customer.setFullName(fullName);
         session.setAttribute("customer", customer);
     }
     session.removeAttribute("staff");      // moi phien lam viec chi mot vai tro

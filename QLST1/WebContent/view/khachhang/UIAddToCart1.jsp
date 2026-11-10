@@ -19,7 +19,13 @@
         response.sendRedirect("UICustomerMain1.jsp");
         return;
     }
-    // item : Item1; sellableQuantity : integer; cart : Cart1
+    // cart : Cart1 - UIOrder1.jsp da lay gio hang hien tai vao phien; mo trang khi chua qua UIOrder1.jsp thi quay ve do
+    Cart1 cart = (Cart1) session.getAttribute("cart");
+    if ((cart == null) || ((request.getParameter("idItem") != null) && (session.getAttribute("listItem") == null))) {
+        response.sendRedirect("UIOrder1.jsp");
+        return;
+    }
+    // item : Item1; sellableQuantity : integer
     Item1 item = null;
     int sellableQuantity = 0;
     String outMessage = "";
@@ -41,11 +47,6 @@
         } else {
             item = (Item1) session.getAttribute("item");
             sellableQuantity = (session.getAttribute("sellableQuantity") == null) ? 0 : (Integer) session.getAttribute("sellableQuantity");
-        }
-        Cart1 cart = (Cart1) session.getAttribute("cart");
-        if (cart == null) {
-            cart = (new CartDAO1()).getActiveCart(customer.getId());
-            session.setAttribute("cart", cart);
         }
         // khach hang nhap so luong va click Them vao gio: trang submit goi chinh no kiem tra so luong
         if ((item != null) && (request.getParameter("inQuantity") != null)) {

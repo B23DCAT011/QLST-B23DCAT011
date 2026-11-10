@@ -72,10 +72,10 @@ bài tập 4/
 
 | Lớp thiết kế | File | Thuộc tính / phương thức → cách cài |
 |---|---|---|
-| UICustomerMain1.jsp | `WebContent/view/khachhang/UICustomerMain1.jsp` | `customer` = session `customer` (chưa có thì `CustomerDAO1.getCustomerInfo(1)`); `subPlaceOrder` = link Đặt hàng |
+| UICustomerMain1.jsp | `WebContent/view/khachhang/UICustomerMain1.jsp` | `customer` = session `customer` (chưa có thì tạo khách hàng mẫu id 1 - Nguyễn Văn An, thay cho đăng nhập); `subPlaceOrder` = link Đặt hàng |
 | UIOrder1.jsp | `WebContent/view/khachhang/UIOrder1.jsp` | `inItemName`, `subSearch` (trang gọi chính nó); `outCartSummary` = bảng giỏ hàng hiện tại + tạm tính; `subViewCart`, `subHome`; `outMessage` + `outSuggestedItems` (4.1); `cart` → session; `listItem` → session |
 | UIItemList1.jsp | `WebContent/view/dungchung/UIItemList1.jsp` | như module 1, `listQuantity` = SL có thể bán; Chọn → `UIAddToCart1.jsp` |
-| UIAddToCart1.jsp | `WebContent/view/khachhang/UIAddToCart1.jsp` | `outItemInfo` = bảng thông tin MH; `inQuantity`; `subAddToCart` (trang gọi chính nó kiểm tra 7.1, 7.2); `subBack`; `outMessage`; `item`, `sellableQuantity`, `cart` ← session |
+| UIAddToCart1.jsp | `WebContent/view/khachhang/UIAddToCart1.jsp` | `outItemInfo` = bảng thông tin MH; `inQuantity`; `subAddToCart` (trang gọi chính nó kiểm tra 7.1, 7.2); `subBack`; `outMessage`; `item`, `sellableQuantity`, `cart` ← session (chưa có `cart` thì quay về `UIOrder1.jsp`) |
 | UICart1.jsp | `WebContent/view/khachhang/UICart1.jsp` | `outsubCartLines` = bảng; `chkSelect` = ô chọn mỗi dòng (đánh dấu sẵn); `inNewQuantity` + `subUpdateLine` (11.1); `subDeleteLine` (11.2); `outTotalAmount` = tổng tiền các dòng được chọn; `inoutDeliveryAddress`, `inoutReceiverPhone` điền sẵn; `subContinue` = Đặt thêm mặt hàng; `subSubmit`; `outMessage`; `customer`, `cart` ← session; `listCartItem` → session |
 | doSaveOrder1.jsp | `WebContent/view/khachhang/doSaveOrder1.jsp` | `listCartItem` = các dòng được chọn; kiểm tra 12.1, 13.1, 13.2 (sai thì quay lại `UICart1.jsp` giữ nguyên lựa chọn); đóng gói `OrderDetail1`, `order : OnlineOrder1`; `outMessage` "Lưu đơn hàng thành công. Mã đơn hàng: DH0125"; `subOK` → trang chủ |
 | CartDAO1 | `src/dao/CartDAO1.java` | `getActiveCart(int idCustomer)` → procedure; `clearCart(int idCart, ArrayList<CartItem1> listCartItem)` → `DELETE` các dòng đã đặt, giỏ hết dòng thì `status = 'đã đặt hàng'` |

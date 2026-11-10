@@ -34,8 +34,9 @@
     // cart : Cart1; listCartItem : CartItem1[]; outMessage : String
     Cart1 cart = (Cart1) session.getAttribute("cart");
     if (cart == null) {
-        cart = (new CartDAO1()).getActiveCart(customer.getId());
-        session.setAttribute("cart", cart);
+        // UIOrder1.jsp da lay gio hang hien tai vao phien; mo trang khi chua qua UIOrder1.jsp thi quay ve do
+        response.sendRedirect("UIOrder1.jsp");
+        return;
     }
     String outMessage = (String) request.getAttribute("outMessage");   // loi do doSaveOrder1.jsp tra ve (12.1, 13.1, 13.2)
     String action = request.getParameter("action");
