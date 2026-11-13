@@ -21,7 +21,8 @@
     }
     // cart : Cart1 - UIOrder1.jsp da lay gio hang hien tai vao phien; mo trang khi chua qua UIOrder1.jsp thi quay ve do
     Cart1 cart = (Cart1) session.getAttribute("cart");
-    if ((cart == null) || ((request.getParameter("idItem") != null) && (session.getAttribute("listItem") == null))) {
+    if ((cart == null) || ((request.getParameter("idItem") != null) && (session.getAttribute("listItem") == null))
+            || ((request.getParameter("idItem") == null) && (session.getAttribute("item") == null))) {
         response.sendRedirect("UIOrder1.jsp");
         return;
     }
@@ -30,48 +31,44 @@
     int sellableQuantity = 0;
     String outMessage = "";
     String inQuantity = "";
-    if (customer != null) {
-        if (request.getParameter("idItem") != null) {
-            // goi tu UIItemList1.jsp khi khach hang chon mot mat hang
-            int idItem = Integer.parseInt(request.getParameter("idItem"));
-            ArrayList<Item1> listItem = (ArrayList<Item1>) session.getAttribute("listItem");
-            ArrayList<Integer> listQuantity = (ArrayList<Integer>) session.getAttribute("listQuantity");
-            for (int i = 0; i < listItem.size(); i++) {
-                if (listItem.get(i).getId() == idItem) {
-                    item = listItem.get(i);
-                    sellableQuantity = listQuantity.get(i);
-                }
+    if (request.getParameter("idItem") != null) {
+        // goi tu UIItemList1.jsp khi khach hang chon mot mat hang
+        int idItem = Integer.parseInt(request.getParameter("idItem"));
+        ArrayList<Item1> listItem = (ArrayList<Item1>) session.getAttribute("listItem");
+        ArrayList<Integer> listQuantity = (ArrayList<Integer>) session.getAttribute("listQuantity");
+        for (int i = 0; i < listItem.size(); i++) {
+            if (listItem.get(i).getId() == idItem) {
+                item = listItem.get(i);
+                sellableQuantity = listQuantity.get(i);
             }
-            session.setAttribute("item", item);
-            session.setAttribute("sellableQuantity", sellableQuantity);
-        } else {
-            item = (Item1) session.getAttribute("item");
-            sellableQuantity = (session.getAttribute("sellableQuantity") == null) ? 0 : (Integer) session.getAttribute("sellableQuantity");
         }
-        // khach hang nhap so luong va click Them vao gio: trang submit goi chinh no kiem tra so luong
-        if ((item != null) && (request.getParameter("inQuantity") != null)) {
-            inQuantity = request.getParameter("inQuantity").trim();
-            int quantity = 0;
-            try {
-                quantity = Integer.parseInt(inQuantity);
-            } catch (NumberFormatException e) {
-                quantity = 0;
-            }
-            int inCart = 0;   // so luong mat hang nay da co trong gio
-            for (CartItem1 ci : cart.getItems()) {
-                if (ci.getItem().getId() == item.getId()) inCart += ci.getQuantity();
-            }
-            if (quantity <= 0) {
-                outMessage = "Số lượng phải là số nguyên dương";                                   // ngoai le 7.2
-            } else if (quantity + inCart > sellableQuantity) {
-                outMessage = "Số lượng vượt quá số lượng có thể bán (còn " + sellableQuantity + ")"; // ngoai le 7.1
-            } else if ((new CartItemDAO1()).addCartItem(cart, item, quantity)) {
-                // them / cong don xong: quay ve giao dien dat hang de chon tiep
-                response.sendRedirect("UIOrder1.jsp");
-                return;
-            } else {
-                outMessage = "Thêm mặt hàng vào giỏ hàng không thành công, vui lòng thử lại";
-            }
+        session.setAttribute("item", item);
+        session.setAttribute("sellableQuantity", sellableQuantity);
+    } else {
+        item = (Item1) session.getAttribute("item");
+        sellableQuantity = (session.getAttribute("sellableQuantity") == null) ? 0 : (Integer) session.getAttribute("sellableQuantity");
+    }
+    // khach hang nhap so luong va click Them vao gio: trang submit goi chinh no kiem tra so luong
+    if ((item != null) && (request.getParameter("inQuantity") != null)) {
+        inQuantity = request.getParameter("inQuantity").trim();
+        int quantity = 0;
+        try {
+            quantity = Integer.parseInt(inQuantity);
+        } catch (NumberFormatException e) {
+            quantity = 0;
+        }
+        int inCart = 0;   // so luong mat hang nay da co trong gio
+        for (CartItem1 ci : cart.getItems()) {
+            if (ci.getItem().getId() == item.getId()) inCart += ci.getQuantity();
+        }
+        if (quantity <= 0) {
+            outMessage = "Số lượng phải là số nguyên dương";                                   // ngoai le 7.2
+        } else if (quantity + inCart > sellableQuantity) {
+            outMessage = "Số lượng vượt quá số lượng có thể bán (còn " + sellableQuantity + ")"; // ngoai le 7.1
+        } else if ((new CartItemDAO1()).addCartItem(cart, item, quantity)) {
+            // them / cong don xong: quay ve giao dien dat hang de chon tiep
+            response.sendRedirect("UIOrder1.jsp");
+            return;
         }
     }
 %>
@@ -83,10 +80,6 @@
 <title>Nhap so luong</title>
 </head>
 <body>
-<% if (item == null) { %>
-    <h4>Chưa chọn mặt hàng.</h4>
-    <button type="button" onclick="location.href='UIOrder1.jsp'">Quay lại</button>
-<% } else { %>
 <h2>Nhập số lượng</h2>
 <form name="nhapsoluong" action="UIAddToCart1.jsp" method="post">
 <!-- outItemInfo : Table -->
@@ -110,6 +103,5 @@
     </tr>
 </table>
 </form>
-<% } %>
 </body>
 </html>

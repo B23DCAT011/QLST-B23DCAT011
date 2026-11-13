@@ -14,18 +14,16 @@
         response.sendRedirect("UIWarehouseMain1.jsp");
         return;
     }
-    if (staff != null) {
-        // nhan vien nhap ten mat hang va click Tim: trang submit goi chinh no xu li
-        // (cung duoc doUpdateItem1.jsp goi lai voi tu khoa cu sau khi sua thanh cong)
-        String inItemName = request.getParameter("inItemName");
-        if ((inItemName != null) && (inItemName.trim().length() > 0)) {
-            String keyword = inItemName.trim();
-            ArrayList<Item1> listItem = (new ItemDAO1()).getItemsByName(keyword, false);
-            session.setAttribute("listItem", listItem);
-            session.setAttribute("keyword", keyword);
-            response.sendRedirect("../dungchung/UIItemList1.jsp");
-            return;
-        }
+    // nhan vien nhap ten mat hang va click Tim: trang submit goi chinh no xu li
+    // (cung duoc doUpdateItem1.jsp goi lai voi tu khoa cu sau khi sua thanh cong)
+    String inItemName = request.getParameter("inItemName");
+    if ((inItemName != null) && (inItemName.trim().length() > 0)) {
+        String keyword = inItemName.trim();
+        ArrayList<Item1> listItem = (new ItemDAO1()).getItemsByName(keyword, false);
+        session.setAttribute("listItem", listItem);
+        session.setAttribute("keyword", keyword);
+        response.sendRedirect("../dungchung/UIItemList1.jsp");
+        return;
     }
 %>
 <!DOCTYPE html>

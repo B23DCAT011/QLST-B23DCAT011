@@ -34,7 +34,7 @@
     String errField = null;
     String action = request.getParameter("action");
 
-    if ((staff != null) && (shown != null) && (action == null) && (request.getParameter("inoutName") != null)) {
+    if ((shown != null) && (action == null) && (request.getParameter("inoutName") != null)) {
         // ---- nhan thong tin MH tu form ----
         item = new Item1();
         item.setId(shown.getId());
@@ -130,7 +130,7 @@
         } else if (modeWarning(oldCounterSaleMode, item, unitsOnShelf)) {
             showWarning = 2;
         }
-    } else if ((staff != null) && (shown != null) && "confirm".equals(action)) {
+    } else if ((shown != null) && "confirm".equals(action)) {
         // nhan vien click Xac nhan tren hop canh bao
         item = shown;
         confirmed = true;
@@ -142,12 +142,6 @@
     // ---- luu thong tin MH ----
     if ((item != null) && (showWarning == 0)) {
         saved = (new ItemDAO1()).updateItem(item);
-        if (!saved) {
-            request.setAttribute("outMessage", "Lưu thông tin mặt hàng không thành công, vui lòng thử lại");
-            request.setAttribute("errField", "save");
-            request.getRequestDispatcher("UIItemDetail1.jsp?action=back").forward(request, response);
-            return;
-        }
     }
     String backToList = "UIItemSearch1.jsp?inItemName=" + URLEncoder.encode(keyword == null ? "" : keyword, "UTF-8");
 %>
@@ -159,10 +153,7 @@
 <title>Sua thong tin mat hang</title>
 </head>
 <body class="hop">
-<% if (item == null) { %>
-    <h4>Không có mặt hàng nào đang được sửa.</h4>
-    <button type="button" onclick="location.href='UIItemSearch1.jsp'">Tìm mặt hàng</button>
-<% } else if (showWarning == 1) { %>
+<% if (showWarning == 1) { %>
     <!-- Hop canh bao ban duoi gia von (ngoai le 10.5) -->
     <h2>Cảnh báo bán dưới giá vốn</h2>
     <p>Giá bán thấp hơn giá nhập thoả thuận cao nhất (<%=money(maxAgreedPrice)%> đ), bạn có chắc muốn lưu?</p>

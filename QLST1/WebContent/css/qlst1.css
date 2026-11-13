@@ -280,13 +280,3 @@ body.hop button {
     margin: 20px 8px 0 8px;
 }
 
-/* anh mat hang (truong inoutImage tren giao dien sua thong tin mat hang) */
-img.anh {
-    max-width: 220px;
-    max-height: 160px;
-    border: 1px solid var(--mau-vien);
-    border-radius: 8px;
-    padding: 4px;
-    background: #ffffff;
-    margin-bottom: 6px;
-}

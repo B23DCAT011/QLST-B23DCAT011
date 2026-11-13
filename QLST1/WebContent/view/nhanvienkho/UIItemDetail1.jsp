@@ -91,7 +91,6 @@
     String[] modes = {"tự chọn trên kệ", "giao từ kho"};
 %>
 <h2>Sửa thông tin mặt hàng</h2>
-<p>Từ khoá tìm kiếm: "<%=esc(keyword)%>"</p>
 <form name="suamathang" action="doUpdateItem1.jsp" method="post" enctype="multipart/form-data">
 <table border="0">
     <tr>
@@ -161,20 +160,9 @@
     </tr>
     <tr>
         <td>Ảnh:</td>
-        <!-- inoutImage : File - hien anh hien tai (thu muc images), chon tep moi thi xem truoc anh moi -->
-        <td><img id="anhMatHang" class="anh" alt=""
-                 <% if ((item.getImage() != null) && (item.getImage().length() > 0)) { %>
-                 src="../../images/<%=java.net.URLEncoder.encode(item.getImage(), "UTF-8").replace("+", "%20")%>"
-                 <% } else { %>style="display:none;"<% } %>
-                 onerror="this.style.display='none';" /><br/>
-            <%=esc(item.getImage())%> <input type="file" name="inoutImage" accept="image/*" onchange="xemTruocAnh(this)" /></td>
+        <!-- inoutImage : File - ten tep anh hien tai va nut chon tep moi -->
+        <td><%=esc(item.getImage())%> <input type="file" name="inoutImage" accept="image/*" /></td>
     </tr>
-    <% if ((outMessage != null) && "save".equals(errField)) { %>
-    <tr>
-        <td></td>
-        <td style="color:red;"><%=outMessage%></td>
-    </tr>
-    <% } %>
     <tr>
         <td></td>
         <td>
@@ -184,19 +172,5 @@
     </tr>
 </table>
 </form>
-<script type="text/javascript">
-    // xem truoc anh nhan vien vua chon (chua luu cho den khi click Sua)
-    function xemTruocAnh(input) {
-        if (input.files && input.files[0]) {
-            var anh = document.getElementById("anhMatHang");
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                anh.src = e.target.result;
-                anh.style.display = "";
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
 </body>
 </html>

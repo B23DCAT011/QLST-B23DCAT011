@@ -19,17 +19,15 @@
         response.sendRedirect("UICustomerMain1.jsp");
         return;
     }
-    if (customer != null) {
-        // khach hang nhap ten mat hang va click Tim: trang submit goi chinh no xu li
-        String inItemName = request.getParameter("inItemName");
-        if ((inItemName != null) && (inItemName.trim().length() > 0)) {
-            String keyword = inItemName.trim();
-            ArrayList<Item1> listItem = (new ItemDAO1()).getItemsByName(keyword, true);
-            session.setAttribute("listItem", listItem);
-            session.setAttribute("keyword", keyword);
-            response.sendRedirect("../dungchung/UIItemList1.jsp");
-            return;
-        }
+    // khach hang nhap ten mat hang va click Tim: trang submit goi chinh no xu li
+    String inItemName = request.getParameter("inItemName");
+    if ((inItemName != null) && (inItemName.trim().length() > 0)) {
+        String keyword = inItemName.trim();
+        ArrayList<Item1> listItem = (new ItemDAO1()).getItemsByName(keyword, true);
+        session.setAttribute("listItem", listItem);
+        session.setAttribute("keyword", keyword);
+        response.sendRedirect("../dungchung/UIItemList1.jsp");
+        return;
     }
 %>
 <!DOCTYPE html>
