@@ -98,7 +98,7 @@
     <td style="text-align:center;"><%=it.getWarrantyPeriod()%> tháng</td>
 <% } %>
     <td style="text-align:center;">
-        <a href="<%=choosePage%>?idItem=<%=it.getId()%>">(click để chọn)</a></td>
+        <a href="<%=choosePage%>?idItem=<%=it.getId()%>"><%=forStaff ? "Sửa" : "Chọn mua"%></a></td>
 </tr>
 <% } %>
 </table>

@@ -132,10 +132,10 @@
     <% } %>
     </td>
     <td style="text-align:right;"><%=money(thanhtien)%></td>
-    <td style="text-align:center;"><a href="UICart1.jsp?action=edit&idCartItem=<%=ci.getId()%>">(click để sửa)</a></td>
+    <td style="text-align:center;"><a href="UICart1.jsp?action=edit&idCartItem=<%=ci.getId()%>">Sửa</a></td>
     <!-- subDeleteLine : submit -->
     <td style="text-align:center;"><button type="button" class="link" name="subDeleteLine"
-        onclick="location.href='UICart1.jsp?action=delete&idCartItem=<%=ci.getId()%>'">(click để xoá)</button></td>
+        onclick="location.href='UICart1.jsp?action=delete&idCartItem=<%=ci.getId()%>'">Xoá</button></td>
 </tr>
 <% } %>
 <tr>
